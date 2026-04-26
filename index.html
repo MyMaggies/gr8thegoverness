@@ -52,7 +52,7 @@
 
         .content {
             padding: 30px 50px 30px 30px;
-            min-height: 400px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
         }
@@ -71,22 +71,33 @@
             font-weight: bold;
         }
 
+        .summary-box {
+            font-size: 1rem;
+            line-height: 1.5;
+            background: white;
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
         .options-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
         }
 
-        .option-card {
+        .option-card, .action-btn {
             border: 2px solid var(--border-color);
             padding: 10px;
             background: white;
             cursor: pointer;
             display: flex;
             align-items: center;
+            font-weight: bold;
+            justify-content: center;
         }
 
-        .option-card:hover {
+        .option-card:hover, .action-btn:hover {
             background-color: var(--header-color);
         }
 
@@ -120,21 +131,12 @@
             background-color: var(--accent-pink);
         }
 
-        /* Scaffolding Styles */
         .scaffold-box {
             margin-top: 15px;
             padding: 15px;
             background: #fdfdfd;
             border: 1px dashed var(--border-color);
             font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .scaffold-title {
-            font-weight: bold;
-            text-decoration: underline;
-            margin-bottom: 5px;
-            display: block;
         }
 
         textarea {
@@ -146,16 +148,7 @@
             resize: none;
         }
 
-        .submit-btn {
-            margin-top: 10px;
-            background: var(--header-color);
-            border: 2px solid var(--border-color);
-            padding: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-        }
-
+        .hidden { display: none; }
         .feedback { margin-top: 10px; font-weight: bold; text-align: center; }
     </style>
 </head>
@@ -163,12 +156,21 @@
 
 <div class="window">
     <div class="window-header">
-        <span>The Governess Quiz</span>
+        <span>The Governess: Learning Module</span>
         <div class="close-icon" onclick="location.reload()">X</div>
     </div>
     
-    <div class="content">
-        <div id="quiz-container">
+    <div class="content" id="main-content">
+        <div id="start-screen">
+            <div class="question-meta">Introduction</div>
+            <div class="question-text">Play Summary</div>
+            <div class="summary-box">
+                In Neil Simon's <em>The Governess</em>, a timid governess named Julia is called into her employer's study to settle her accounts. Julia is supposed to be paid <strong>40 rubles</strong> per month[cite: 8, 10]. However, the Mistress acts in an <strong>authoritative</strong> manner[cite: 61, 62], cruelly deducting money for unfair reasons to see if Julia will stand up for herself. Throughout the conversation, Julia remains <strong>frightened</strong> [cite: 71, 73] and keeps her head down [cite: 41], highlighting the harsh reality of <strong>social class differences</strong>[cite: 36, 54].
+            </div>
+            <div class="action-btn" onclick="startQuiz()">START QUIZ CHALLENGE</div>
+        </div>
+
+        <div id="quiz-container" class="hidden">
             <div id="q-header" class="question-meta"></div>
             <div id="q-text" class="question-text"></div>
             <div id="q-options" class="options-grid"></div>
@@ -197,19 +199,31 @@
             correct: 1
         },
         {
-            meta: "Q3 | Character Analysis",
-            q: "Why does Julia keep her head down?",
-            options: ["She is shy", "She is afraid", "She is bored"],
+            meta: "Q3 | Main Idea",
+            q: "What is the MAIN idea of the play?",
+            options: ["Kindness is misunderstood", "Social class differences", "Life of a governess"],
             correct: 1
         },
         {
-            meta: "Q4 | Bonus Analysis",
-            q: "Character Analysis: Describe the Mistress.",
+            meta: "Q4 | Character Analysis",
+            q: "How would you describe the Mistress's behavior?",
+            options: ["Shy", "Authoritative", "Satisfied"],
+            correct: 1
+        },
+        {
+            meta: "Q5 | Final Analysis",
+            q: "Describe the character of the Mistress and her goal.",
             type: "text"
         }
     ];
 
     let currentIdx = 0;
+
+    function startQuiz() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('quiz-container').classList.remove('hidden');
+        render();
+    }
 
     function render() {
         const data = quizData[currentIdx];
@@ -223,25 +237,25 @@
 
         if (data.type === "text") {
             const area = document.createElement('textarea');
-            area.placeholder = "Write your analysis here...";
+            area.placeholder = "Explain her traits here...";
             optionsBox.appendChild(area);
 
-            // The Scaffolded Model
             const scaffold = document.createElement('div');
             scaffold.className = "scaffold-box";
             scaffold.innerHTML = `
-                <span class="scaffold-title">Writing Model:</span>
-                The Mistress can be described as <strong>[strict/authoritative]</strong> because she 
-                intentionally cheats Julia. Her goal is to teach Julia to <strong>[speak up/be strong]</strong> 
-                and stop being so <strong>[frightened/submissive]</strong>.
+                <strong>Scaffolded Model:</strong><br>
+                The Mistress is <strong>[strict/authoritative]</strong> because she tries to cheat Julia. 
+                Her goal is to teach Julia to <strong>[speak up]</strong> because she thinks Julia is 
+                too <strong>[frightened/submissive]</strong>.
             `;
             optionsBox.appendChild(scaffold);
             
             const btn = document.createElement('div');
-            btn.className = "submit-btn";
-            btn.innerText = "SUBMIT & FINISH";
+            btn.className = "action-btn";
+            btn.style.marginTop = "10px";
+            btn.innerText = "FINISH";
             btn.onclick = () => {
-                container.innerHTML = "<h2>Challenge Complete</h2><p>You have successfully analyzed the power dynamics between Julia and the Mistress.</p>";
+                container.innerHTML = "<h2>Module Complete</h2><p>You have mastered the analysis of 'The Governess'.</p>";
             };
             optionsBox.appendChild(btn);
         } else {
@@ -280,8 +294,6 @@
             render();
         }
     }
-
-    render();
 </script>
 
 </body>
