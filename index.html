@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Governess Quiz Challenge</title>
+    <title>The Governess: Mastery Module</title>
     <style>
         :root {
             --bg-color: #FFF9D1; 
@@ -45,25 +45,25 @@
         }
 
         .content {
-            padding: 30px 50px 30px 30px;
-            min-height: 420px;
+            padding: 20px 50px 20px 30px;
+            min-height: 450px;
             display: flex;
             flex-direction: column;
         }
 
         .question-meta { font-size: 0.85rem; color: #555; text-transform: uppercase; margin-bottom: 5px; }
-        .question-text { font-size: 1.3rem; line-height: 1.3; margin-bottom: 20px; font-weight: bold; }
+        .question-text { font-size: 1.2rem; line-height: 1.3; margin-bottom: 15px; font-weight: bold; }
 
         .summary-box {
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
             background: white;
             border: 2px solid var(--border-color);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
         }
 
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
 
         .option-card, .action-btn {
             border: 2px solid var(--border-color);
@@ -85,12 +85,12 @@
 
         .scroll-btn { height: 35px; border-top: 2px solid var(--border-color); display: flex; justify-content: center; align-items: center; cursor: pointer; background-color: var(--accent-pink); }
         
-        textarea { width: 100%; height: 80px; border: 2px solid var(--border-color); padding: 10px; font-family: inherit; resize: none; margin-bottom: 10px; }
+        textarea { width: 100%; height: 100px; border: 2px solid var(--border-color); padding: 10px; font-family: inherit; resize: none; margin-bottom: 10px; }
         
-        .scaffold-box { padding: 10px; background: #eee; border: 1px dashed #000; font-size: 0.85rem; margin-bottom: 10px; }
+        .scaffold-box { padding: 12px; background: #fff; border: 1px dashed #000; font-size: 0.85rem; margin-bottom: 10px; line-height: 1.6; }
 
         .hidden { display: none; }
-        .feedback { margin-top: 10px; font-weight: bold; text-align: center; }
+        .feedback { margin-top: 10px; font-weight: bold; text-align: center; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -106,7 +106,7 @@
             <div class="question-meta">Introduction</div>
             <div class="question-text">Play Summary</div>
             <div class="summary-box">
-                In Neil Simon's <em>The Governess</em>, a timid governess named Julia is called into her employer's study to settle her accounts. Julia is supposed to be paid <strong>40 rubles</strong> per month[cite: 10, 93]. However, the Mistress acts in an <strong>authoritative</strong> manner , cruelly deducting money for unfair reasons to see if Julia will stand up for herself[cite: 80, 82]. Throughout the conversation, Julia remains <strong>frightened</strong> and keeps her head down [cite: 41, 43, 73, 89], highlighting the harsh reality of <strong>social class differences</strong>[cite: 36, 54, 55].
+                In Neil Simon's <em>The Governess</em>[cite: 32], a timid governess named Julia is called into her employer's study to settle her accounts. Julia is supposed to be paid <strong>40 rubles</strong> per month. However, the Mistress acts in an <strong>authoritative</strong> manner [cite: 62], cruelly deducting money for unfair reasons to see if Julia will stand up for herself[cite: 80, 82]. Throughout the conversation, Julia remains <strong>frightened</strong>  and keeps her head down, highlighting the harsh reality of <strong>social class differences</strong>[cite: 54, 55].
             </div>
             <div class="action-btn" onclick="startQuiz()" style="justify-content:center">START CHALLENGE</div>
         </div>
@@ -127,22 +127,17 @@
 
 <script>
     const quizData = [
-        // ROUND 1: Slides Recall
-        { meta: "Q1 | Julia's Pay", q: "Julia is supposed to receive how much pay each month?", options: ["10 rubles", "20 rubles", "40 rubles"], correct: 2 },
-        { meta: "Q2 | Character", q: "Why doesn't Julia speak up for herself?", options: ["She agrees with Mistress", "She fears losing her job", "She doesn't understand"], correct: 1 },
-        { meta: "Q3 | Actions", q: "Why does Julia reluctantly count the money?", options: ["She can't count", "She thinks it's too much", "She suspects cheating"], correct: 2 },
-        { meta: "Q4 | Character", q: "Why does Julia keep her head down?", options: ["She is afraid", "She can't see", "She is shy"], correct: 0 },
-        { meta: "Q5 | Analysis", q: "The Mistress tries to teach Julia to:", options: ["Care more", "Speak up", "Listen carefully"], correct: 1 },
-        
-        // ROUND 2: Reinforcement (True/False & Variation)
-        { meta: "Q6 | True or False", q: "The Mistress's attitude is best described as authoritative.", options: ["True", "False"], correct: 0 },
-        { meta: "Q7 | Inference", q: "What can we infer about Julia's state of mind?", options: ["She is excited", "She is frightened", "She is angry"], correct: 1 },
-        { meta: "Q8 | Theme", q: "Which is a key THEME of the play?", options: ["Social class differences exist", "Kindness is misunderstood", "Servant life is easy"], correct: 0 },
-        
-        // FINAL: 5-Mark Analysis
+        { meta: "Q1 | Julia's Pay", q: "Julia is supposed to receive how much pay each month? [cite: 8]", options: ["10 rubles", "20 rubles", "40 rubles"], correct: 2 },
+        { meta: "Q2 | Character", q: "Why doesn't Julia speak up for herself? [cite: 13]", options: ["She agrees with Mistress", "She fears losing her job", "She doesn't understand"], correct: 1 },
+        { meta: "Q3 | Actions", q: "Why does Julia reluctantly count the money? [cite: 22]", options: ["She can't count", "She thinks it's too much", "She suspects cheating"], correct: 2 },
+        { meta: "Q4 | Character", q: "Why does Julia keep her head down? [cite: 41]", options: ["She is afraid", "She can't see", "She is shy"], correct: 0 },
+        { meta: "Q5 | Analysis", q: "The Mistress tries to teach Julia to: [cite: 80]", options: ["Care more", "Speak up", "Listen carefully"], correct: 1 },
+        { meta: "Q6 | True or False", q: "The Mistress's attitude is best described as authoritative. ", options: ["True", "False"], correct: 0 },
+        { meta: "Q7 | Inference", q: "What can we infer about Julia's state of mind? [cite: 71]", options: ["She is excited", "She is frightened", "She is angry"], correct: 1 },
+        { meta: "Q8 | Theme", q: "Which is a key THEME of the play? [cite: 53]", options: ["Social class differences exist", "Kindness is misunderstood", "Servant life is easy"], correct: 0 },
         { 
             meta: "Final Task | Character Analysis (5 Marks)", 
-            q: "Describe the Mistress and her goal. Use the scaffold below.", 
+            q: "Describe the Mistress and her goal using the scaffold below.", 
             type: "essay",
             expected: "The Mistress is authoritative because she tries to cheat Julia. Her goal is to teach Julia to speak up because she thinks Julia is too frightened."
         }
@@ -158,7 +153,6 @@
 
     function render() {
         const data = quizData[currentIdx];
-        const container = document.getElementById('quiz-container');
         document.getElementById('q-header').innerText = data.meta;
         document.getElementById('q-text').innerText = data.q;
         const optionsBox = document.getElementById('q-options');
@@ -173,12 +167,17 @@
 
             const scaffold = document.createElement('div');
             scaffold.className = "scaffold-box";
-            scaffold.innerHTML = `<strong>Required:</strong> The Mistress is <b>[trait]</b> because she tries to cheat Julia. Her goal is to teach Julia to <b>[action]</b> because she thinks Julia is too <b>[emotion]</b>.`;
+            scaffold.innerHTML = `
+                <strong>Scaffolded Model:</strong><br>
+                The Mistress is <strong>[authoritative / shy / satisfied]</strong> because she tries to cheat Julia. 
+                Her goal is to teach Julia to <strong>[speak up / listen / care]</strong> because she thinks Julia 
+                is too <strong>[frightened / excited / happy]</strong>.
+            `;
             optionsBox.appendChild(scaffold);
             
             const btn = document.createElement('div');
             btn.className = "action-btn";
-            btn.innerText = "VALIDATE PARAGRAPH";
+            btn.innerText = "VALIDATE (5 MARKS)";
             btn.style.justifyContent = "center";
             btn.onclick = validateEssay;
             optionsBox.appendChild(btn);
@@ -206,12 +205,14 @@
         const feedback = document.getElementById('feedback');
 
         if (userText === expected) {
-            feedback.innerText = "EXACT MATCH! 5 MARKS."; feedback.style.color = "green";
+            feedback.innerText = "MATCH FOUND: 5/5 MARKS! (Facts: Authoritative, Cheats, 40 Rubles implied, Teaches, Frightened)"; 
+            feedback.style.color = "green";
             setTimeout(() => {
-                document.getElementById('main-content').innerHTML = "<h2>Mastery Complete</h2><p>You have successfully analyzed 'The Governess'.</p>";
-            }, 1500);
+                document.getElementById('quiz-container').innerHTML = "<h2>Mastery Complete</h2><p>You have successfully analyzed 'The Governess'.</p>";
+            }, 2000);
         } else {
-            feedback.innerText = "NOT AN EXACT MATCH. CHECK SPELLING AND WORDING."; feedback.style.color = "red";
+            feedback.innerText = "ERROR: ENSURE YOU USE THE CORRECT TERMS FROM THE SCAFFOLD."; 
+            feedback.style.color = "red";
         }
     }
 
